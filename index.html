@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>BEZUMEC | Цифровой Хаос</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #000;
+      font-family: 'Courier New', monospace;
+      color: #00ffe1;
+      overflow: hidden;
+      position: relative;
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      background-color: #000;
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 80px;
+      font-size: 4em;
+      text-shadow: 0 0 15px #00ffe1, 0 0 60px #00ffe1;
+      animation: flicker 1.5s infinite alternate;
+      z-index: 1;
+      position: relative;
+    }
+
+    @keyframes flicker {
+      0%, 19%, 22%, 25%, 53%, 57%, 100% {
+        opacity: 1;
+      }
+      20%, 24%, 55% {
+        opacity: 0.2;
+      }
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-top: 40px;
+      z-index: 1;
+      position: relative;
+    }
+
+    button, .donate-button {
+      background: transparent;
+      color: #00ffe1;
+      border: 2px solid #00ffe1;
+      padding: 12px 24px;
+      font-size: 1.2em;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.3s;
+      animation: pulse 2s infinite;
+    }
+
+    button:hover, .donate-button:hover {
+      background-color: #00ffe1;
+      color: #000;
+      box-shadow: 0 0 15px #00ffe1, 0 0 50px #00ffe1;
+      animation: none;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+      100% { transform: scale(1); }
+    }
+
+    .section {
+      max-width: 800px;
+      margin: 30px auto;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.85);
+      border: 1px solid #00ffe133;
+      border-radius: 8px;
+      display: none;
+      animation: fadeIn 0.7s ease-out forwards;
+      z-index: 1;
+      position: relative;
+      box-shadow: 0 0 25px #00ffe1b0;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    a {
+      color: #00ffe1;
+      text-decoration: underline;
+    }
+
+    footer {
+      text-align: center;
+      color: #00ffe1;
+      font-size: 1em;
+      padding: 30px;
+      background: rgba(0, 0, 0, 0.95);
+      position: relative;
+      z-index: 2;
+      box-shadow: 0 -2px 10px #00ffe144;
+    }
+
+    .donate-section {
+      margin-top: 40px;
+      text-align: center;
+      z-index: 1;
+      position: relative;
+    }
+
+    .donate-section pre {
+      background: rgba(0,0,0,0.7);
+      border: 1px solid #00ffe1;
+      padding: 15px;
+      border-radius: 8px;
+      display: inline-block;
+      font-size: 0.95em;
+      line-height: 1.5em;
+      color: #00ffcc;
+      max-width: 95%;
+      overflow-wrap: break-word;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="matrix"></canvas>
+
+  <h1>BEZUMEC</h1>
+
+  <div class="buttons">
+    <button onclick="toggleSection('about')">Обо мне</button>
+    <button onclick="toggleSection('skills')">Навыки</button>
+    <button onclick="toggleSection('principles')">Принципы</button>
+    <button onclick="toggleSection('future')">Будущее</button>
+    <button onclick="toggleSection('contacts')">Контакты</button>
+  </div>
+
+  <div class="donate-section">
+    <button class="donate-button" onclick="toggleSection('donate')">⚡ Поддержать </button>
+  </div>
+
+  <div id="about" class="section">
+    <h2>Обо мне</h2>
+    <p>19 лет. Telegram-автоматизация — моя зона комфорта. Я не бегаю за шансами. Я их создаю. Не везёт в личном, зато код всегда под контролем.<br><br>
+    Я — не просто пользователь Telegram API. Я его держа́тель, хаос-контроллер, повелитель циклов и потоков.</p>
+  </div>
+
+  <div id="skills" class="section">
+    <h2>Навыки</h2>
+    <ul>
+      <li>Python-магия: Telethon, Selenium, asyncio, многопоточность</li>
+      <li>Telegram: подписки, инвайты, капчи, подписка даже в бане (почти)</li>
+      <li>Управление .tdata, авто-логины, сессии на лету</li>
+      <li>Интеграция с соцсетями: TikTok, YouTube, Insta — парсинг и действия</li>
+      <li>Боты, скрипты, антиспам, обходы и хаки в рамках закона</li>
+    </ul>
+  </div>
+
+  <div id="principles" class="section">
+    <h2>Принципы</h2>
+    <p>
+      "Если просил весь код — значит весь код."<br>
+      "Если сказал проверить — значит без лишнего."<br>
+      "Если сделал — оно должно 🔥работать🔥. И точка."
+    </p>
+  </div>
+
+  <div id="future" class="section">
+    <h2>Будущее</h2>
+    <p>Я не смотрю в будущее. Я его переписываю.<br>
+    Каждая строка — это вызов.<br>
+    Каждое нажатие Enter — это манифест безумца.<br><br>
+    Будущее? Оно — за мной. И это не прогноз. Это предупреждение.</p>
+  </div>
+
+  <div id="contacts" class="section">
+    <h2>Контакты</h2>
+    <p>Telegram: <a href="https://t.me/bezumec_r" target="_blank">@bezumec_r</a><br>
+    Остальное — только по делу. Только по-честному. Только в коде.</p>
+  </div>
+
+  <div id="donate" class="section">
+    <h2>⚡ Поддержка </h2>
+    <p>Я не проект. Я поток. Если хочешь зарядить хаос энергией — вот ключи к безумию:</p>
+    <pre>BEP20: 0x381e17c49129f6564900397DA11D31949d6d82a9
+TRC20: THuaiSgVJ6vQNAaBCdTERRVF1Nd8JrhdcZ
+TON: UQA6FsWd0sgtaS8g_jEYIS7tLCtqiLCx-BaMM7iGTb4WlWFB</pre>
+    <p>Благодарность не обязательна. Но она меня мотивирует еще больше  😈</p>
+  </div>
+
+  <footer>
+    <p><strong>&copy; 2025 BEZUMEC. Все права защищены.</strong></p>
+    <p>Мы работаем строго в рамках действующего законодательства. Все наши разработки, скрипты и инструменты предназначены для этичного и легального использования.<br>
+    Мы не поддерживаем, не рекомендуем и не сопровождаем противоправную деятельность. Помни:<br>
+    📌 У каждой команды — есть последствия.<br>
+    📌 У каждого действия — есть ответственность.<br>
+    📌 Умный код не нарушает закон — он его уважает.</p>
+  </footer>
+
+  <script>
+    function toggleSection(id) {
+      document.querySelectorAll('.section').forEach(s => {
+        s.style.display = (s.id === id && s.style.display !== 'block') ? 'block' : 'none';
+      });
+    }
+
+    const canvas = document.getElementById('matrix');
+    const ctx = canvas.getContext('2d');
+    canvas.height = window.innerHeight;
+    canvas.width = window.innerWidth;
+
+    const letters = "01abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ{}[]<>+=*&^%$#@!".split("");
+    const fontSize = 14;
+    const columns = canvas.width / fontSize;
+    const drops = Array(Math.floor(columns)).fill(1);
+
+    function drawMatrix() {
+      ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "#00ffe1";
+      ctx.font = fontSize + "px monospace";
+
+      for (let i = 0; i < drops.length; i++) {
+        const text = letters[Math.floor(Math.random() * letters.length)];
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i]++;
+      }
+    }
+
+    setInterval(drawMatrix, 33);
+  </script>
+</body>
+</html>
